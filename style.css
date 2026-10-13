@@ -1,0 +1,219 @@
+/* Schriften: lokal installiert oder aus /fonts (Lizenz beachten) */
+@font-face {
+  font-family: "Playbill";
+  src: local("Playbill"), local("PLAYBILL"), url("fonts/PLAYBILL.TTF") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Berlin Sans FB";
+  src: local("Berlin Sans FB"), local("BerlinSansFB-Reg"), url("fonts/BRLNSR.TTF") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --orange: #ff6a00;
+  --ink: #1f0a00;
+  --hh: 87px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+::selection {
+  background: var(--orange);
+  color: var(--ink);
+}
+
+body {
+  font-family: "Berlin Sans FB", "Trebuchet MS", sans-serif;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #040200 0%, #140700 22%, #3f1a00 48%, #7a3200 72%, #a04000 100%);
+}
+
+header {
+  position: relative;
+  z-index: 3;
+  height: var(--hh);
+  display: flex;
+  align-items: center;
+  padding-left: 67px;
+  background: var(--orange);
+  border-bottom: 1px solid #000;
+}
+
+.jump {
+  font-size: 37px;
+  color: #4a1260;
+  margin-right: 160px;
+  white-space: nowrap;
+}
+
+nav {
+  display: flex;
+  gap: 36px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-right: 20px;
+}
+
+nav::-webkit-scrollbar {
+  display: none;
+}
+
+nav a {
+  color: #000;
+  font-size: 17.5px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+nav a:hover,
+nav a:focus-visible {
+  color: #fff;
+}
+
+main {
+  position: relative;
+  height: calc(100dvh - var(--hh));
+  overflow: hidden;
+}
+
+/* 3D-Buehne */
+#stage {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+#anchor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  perspective: 1600px;
+}
+
+#model {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.part {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+}
+
+.face {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--s) * var(--fw));
+  height: calc(var(--s) * var(--fh));
+  margin-left: calc(var(--s) * var(--fw) / -2);
+  margin-top: calc(var(--s) * var(--fh) / -2);
+  background-image: var(--skin);
+  background-size: calc(var(--s) * 64) calc(var(--s) * 64);
+  background-position: calc(var(--s) * var(--ux) * -1) calc(var(--s) * var(--uy) * -1);
+  image-rendering: pixelated;
+  backface-visibility: hidden;
+  transform: var(--rot) translateZ(calc(var(--s) * var(--tz)));
+}
+
+.noskin .face {
+  background-color: #7a5a45;
+}
+
+/* Willkommenstext */
+.welcome {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 4vh 3.5vw;
+  font-family: "Playbill", Impact, "Arial Narrow", sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: .95;
+  color: var(--orange);
+  -webkit-text-stroke: .09em var(--ink);
+  paint-order: stroke fill;
+  word-spacing: .25em;
+  pointer-events: none;
+}
+
+.welcome span {
+  display: block;
+}
+
+.l1 {
+  font-size: 6.6vw;
+}
+
+.l2 {
+  font-size: 13.3vw;
+}
+
+.l3 {
+  font-size: 7vw;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  :root {
+    --hh: 64px;
+  }
+
+  header {
+    padding-left: 20px;
+  }
+
+  .jump {
+    font-size: 28px;
+    margin-right: 24px;
+  }
+
+  nav {
+    gap: 20px;
+  }
+
+  nav a {
+    font-size: 15px;
+  }
+
+  .welcome {
+    padding-left: 5vw;
+  }
+
+  .l1 {
+    font-size: 11vw;
+  }
+
+  .l2 {
+    font-size: 21vw;
+  }
+
+  .l3 {
+    font-size: 12vw;
+  }
+
+  #stage {
+    opacity: .55;
+  }
+}
